@@ -31,11 +31,11 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\Column(type:Types::BOOLEAN)]
-    private ?string $showHome = null;
+    #[ORM\Column(type: 'boolean')]
+    private bool $showHome;    
 
     
-    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
     private ?Category $category = null;
 
     /**

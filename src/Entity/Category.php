@@ -21,7 +21,7 @@ class Category
     /**
      * @var Collection<int, product>
      */
-    #[ORM\OneToMany(targetEntity: product::class, mappedBy: 'categories')]
+    #[ORM\OneToMany(targetEntity: product::class, mappedBy: 'category')]
     private Collection $products;
 
     public function __construct()
