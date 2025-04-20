@@ -1,16 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-Welcome!
-{% endblock %}
+{% block title %}Bienvenue sur notre site e-commerce - Produits artisanaux{% endblock %}
 
 {% block body %}
-<h1>HELLO FROM CONTROLLER FROM TWIG {{name}}</h1>
-<a href="{{path("app_product")}}">Products
-{% endblock %}
+  <div class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="text-center mb-16">
+        <h1 class="text-4xl font-light tracking-tight text-black mb-4">Bienvenue sur notre boutique artisanale</h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Découvrez des accessoires, objets déco, textiles faits main.</p>
+      </header>
 
-{% block javascripts %}
-<script>
-    alert('Hello from javascript');
-</script>
+<section class="mb-16">
+  <h2 class="text-xl text-black text-center mb-6">Catégories</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+    {% for category in categories %}
+      <div class="group bg-white border border-gray-100 rounded-sm overflow-hidden shadow-sm hover:shadow-md transition duration-300">
+        <div class="relative h-40 overflow-hidden">
+          <img 
+           src="{{ category.image }}"
+           alt="{{ category.name }}" 
+           class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+        </div>
+        <div class="p-3 text-center">
+          <h3 class="text-sm font-medium text-gray-900">{{ category.name }}</h3>
+        </div>
+      </div>
+    {% else %}
+      <div class="col-span-full text-center py-6">
+        <p class="text-gray-500 text-sm">Aucune catégorie disponible pour le moment.</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+      <section class="mb-24">
+        <h2 class="text-2xl text-black text-center mb-10">
+        Nos Produits Préférés
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {% for product in homeProducts %}
+            <div class="bg-white border border-gray-100 rounded-sm overflow-hidden shadow-sm hover:shadow-md transition duration-300">
+              <div class="relative h-72 overflow-hidden">
+                <img 
+                src="{{product.image}}" 
+                alt="{{ product.name }}" 
+                class="w-full h-full object-cover">
+              </div>
+              <div class="p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-2">{{ product.name }}</h3>
+                <p class="text-sm text-gray-500 mb-4 line-clamp-2">{{ product.description }}</p>
+                <p class="text-base font-medium text-gray-900 mt-4">{{ product.price }} €</p>
+              </div>
+            </div>
+          {% else %}
+            <div class="col-span-full text-center py-12">
+              <p class="text-gray-500">Aucun produit phare pour le moment.</p>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="bg-black text-white py-16 text-center px-4 mb-12">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-2xl font-light mb-6">Découvrez des produits uniques faits main</h2>
+          <p class="text-base mb-8 text-gray-300">Tous nos produits sont réalisés avec passion par des artisans locaux.</p>
+          <a href="{{ path('app_product') }}" class="inline-block border border-white text-white px-8 py-3 font-light hover:bg-white hover:text-black transition duration-300">Explorer la collection</a>
+        </div>
+      </section>
+    </div>
+  </div>
 {% endblock %}

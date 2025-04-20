@@ -31,6 +31,9 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    #[ORM\Column(type:Types::BOOLEAN)]
+    private ?string $showHome = null;
+
     
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Category $category = null;
@@ -49,6 +52,17 @@ class Product
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getShowHome(): ?bool
+    {
+        return $this->showHome;
+    }
+
+    public function setShowHome(bool $showHome): self
+    {
+        $this->showHome = $showHome;
+        return $this;
     }
 
     public function getName(): ?string

@@ -39,10 +39,24 @@ class Category
         return $this->name;
     }
 
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
     public function setName(string $name): static
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
         return $this;
     }
 
