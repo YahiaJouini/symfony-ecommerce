@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Welcome!
+{% endblock %}
+
+{% block body %}
+<h1>HELLO FROM CONTROLLER FROM TWIG {{name}}</h1>
+<a href="{{path("app_product")}}">Products
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    alert('Hello from javascript');
+</script>
+{% endblock %}
