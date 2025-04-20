@@ -8,50 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 relative">
-        <nav class="bg-slate-200 shadow-sm fixed w-full inset-x-0 top-0 z-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex">
-                        <div class="flex-shrink-0 flex items-center">
-                            <a href="{{ path('app_home') }}" class="text-xl font-semibold text-gray-800">
-                                Boutique Artisanale
-                            </a>
-                        </div>
-                        <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                            <a href="{{ path('app_home') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {% if app.request.attributes.get('_route') == 'app_home' %}<border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} text-sm font-medium">
-                                Home
-                            </a>
-                            <a href="{{ path('app_product') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {% if app.request.attributes.get('_route') == 'app_product' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} text-sm font-medium">
-                                Products
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center">
-                        {% if app.user %}
-                            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                                <span class="text-sm text-gray-500 mr-2">{{ app.user.email }}</span>
-                                <a href="{{ path('app_logout') }}" class="text-sm text-gray-700 bg-gray-100 py-2 px-4 rounded-md hover:bg-gray-200">
-                                    Logout
-                                </a>
-                            </div>
-                        {% else %}
-                            <div class="hidden sm:flex sm:items-center sm:ml-6 space-x-2">
-                                <a href="{{ path('app_login') }}" class="text-sm text-gray-700 py-2 px-4 rounded-md hover:bg-gray-50">
-                                    Login
-                                </a>
-                                <a href="{{ path('app_register') }}" class="text-sm text-white bg-gray-800 py-2 px-4 rounded-md hover:bg-gray-700">
-                                    Register
-                                </a>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </nav>
-
+    {% include 'navbar.html.twig' %}
     <div class="w-[90%] mx-auto">
         {% block body %}{% endblock %}
    </div>
+    {% include 'footer.html.twig' %}
 </body>
 </html>

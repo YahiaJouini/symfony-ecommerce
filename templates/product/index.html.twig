@@ -3,51 +3,53 @@
 {% block title %}Product List{% endblock %}
 
 {% block body %}
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 !mt-28 ">
-        <h1 class="text-3xl font-light tracking-tight text-gray-900 mb-12 text-center">Product Collection</h1>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 !mt-28">
+    <h1 class="text-3xl font-light tracking-tight text-gray-900 mb-12 text-center">Nos Produits</h1>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for product in products %}
-                <div class="group bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
-                    <div class="relative">
-                        <img src="{{product.image}}" 
-                            alt="{{ product.name }}" 
-                            class="w-full h-64 object-cover">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for product in products %}
+            <div class="group bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
+                <div class="relative">
+                    <img 
+                        src="{{ product.image }}" 
+                        alt="{{ product.name }}" 
+                        class="w-full h-64 object-cover">
+                    
+                    {% if product.stock <= 0 %}
+                        <div class="absolute top-4 right-4 bg-black text-white text-xs uppercase tracking-wide py-1 px-2">
+                            Hors stock
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="p-6">
+                    <h2 class="text-lg font-medium text-gray-900 mb-2">{{ product.name }}</h2>
+                    
+                    {% if product.description %}
+                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">{{ product.description }}</p>
+                    {% endif %}
+                    
+                    <div class="flex items-center justify-between mt-4">
+                        <span class="text-base font-medium text-gray-900">${{ product.price }}</span>
                         
-                        {% if product.stock <= 0 %}
-                            <div class="absolute top-4 right-4 bg-black text-white text-xs uppercase tracking-wide py-1 px-2">
-                                Sold out
-                            </div>
+                        {% if product.stock > 0 %}
+                            <span class="text-xs text-gray-500">{{ product.stock }} in stock</span>
                         {% endif %}
                     </div>
                     
-                    <div class="p-6">
-                        <h2 class="text-lg font-medium text-gray-900 mb-2">{{ product.name }}</h2>
-                        
-                        {% if product.description %}
-                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">{{ product.description }}</p>
-                        {% else %}
-                            <p class="text-sm text-gray-300 mb-4 italic">No description available</p>
-                        {% endif %}
-                        
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-base font-medium text-gray-900">${{ product.price }}</span>
-                            
-                            {% if product.stock > 0 %}
-                                <span class="text-xs text-gray-500">{{ product.stock }} in stock</span>
-                            {% endif %}
-                        </div>
-                        
-                        <a href="#" class="mt-4 w-full inline-flex justify-center items-center py-2 px-4 border border-black {% if product.stock > 0 %}bg-black text-white hover:bg-gray-800{% else %}bg-white text-gray-400 border-gray-200 cursor-not-allowed{% endif %} text-sm font-medium transition-colors duration-200">
-                            View Details
-                        </a>
-                    </div>
+                    <a href="#" 
+                       class="mt-4 w-full inline-flex justify-center items-center py-2 px-4 border border-black 
+                              {% if product.stock > 0 %}bg-black text-white hover:bg-gray-800{% else %}bg-white text-gray-400 border-gray-200 cursor-not-allowed{% endif %} 
+                              text-sm font-medium transition-colors duration-200">
+                        Voir details
+                    </a>
                 </div>
-            {% else %}
-                <div class="col-span-3 py-20 text-center">
-                    <p class="text-gray-500">No products available at this time.</p>
-                </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% else %}
+            <div class="col-span-3 py-20 text-center">
+                <p class="text-gray-500">Produit pas disponible.</p>
+            </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

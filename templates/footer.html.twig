@@ -1,0 +1,19 @@
+<footer class="bg-slate-200 shadow-sm w-full inset-x-0 bottom-0 mt-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600">
+      <div class="mb-4 sm:mb-0">
+        <a href="{{ path('app_home') }}" class="font-semibold text-gray-800 hover:text-gray-900">
+          Boutique Artisanale
+        </a>
+      </div>
+      <div class="flex space-x-4">
+        <a href="{{ path('app_home') }}" class="hover:text-gray-800">Acceuil</a>
+        <a href="{{ path('app_product') }}" class="hover:text-gray-800">Produits</a>
+        <a href="#" class="hover:text-gray-800">Contact</a>
+      </div>
+      <div class="mt-4 sm:mt-0 text-xs text-gray-500 text-center sm:text-right">
+        &copy; {{ "now"|date("Y") }} Boutique Artisanale. All rights reserved. Developed by <span class="font-medium text-gray-700">Yahia Jouini</span>.
+      </div>
+    </div>
+  </div>
+</footer>
