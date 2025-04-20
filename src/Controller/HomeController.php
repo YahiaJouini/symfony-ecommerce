@@ -10,7 +10,7 @@ use App\Repository\CategoryRepository;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route('/', name: 'app_home')]
     public function index(
         ProductRepository $productRepository,
         CategoryRepository $categoryRepository
