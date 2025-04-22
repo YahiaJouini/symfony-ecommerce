@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Product;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -19,9 +20,9 @@ class Category
     private ?string $name = null;
 
     /**
-     * @var Collection<int, product>
+     * @var Collection<int, Product>
      */
-    #[ORM\OneToMany(targetEntity: product::class, mappedBy: 'category')]
+    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category')]
     private Collection $products;
 
     public function __construct()

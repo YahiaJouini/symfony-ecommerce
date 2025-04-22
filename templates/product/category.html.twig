@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits de la catégorie{% endblock %}
+
+{% block body %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 !mt-28">
+    <h1 class="text-3xl font-light tracking-tight text-gray-900 mb-2 text-center">
+        Produits dans la catégorie :
+        <span class="font-semibold text-indigo-600">{{ category.name }}</span>
+    </h1>
+
+    <p class="text-center text-gray-500 mb-12">
+        Découvrez tous les produits disponibles dans la catégorie <strong>{{ category.name }}</strong>.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for product in pagination %}
+            <div class="group bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
+                <div class="relative">
+                    <img 
+                        src="{{ product.image }}" 
+                        alt="{{ product.name }}" 
+                        class="w-full h-64 object-cover">
+                    
+                    {% if product.stock <= 0 %}
+                        <div class="absolute top-4 right-4 bg-black text-white text-xs uppercase tracking-wide py-1 px-2">
+                            Hors stock
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="p-6">
+                    <h2 class="text-lg font-medium text-gray-900 mb-2">{{ product.name }}</h2>
+                    
+                    {% if product.description %}
+                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">{{ product.description }}</p>
+                    {% endif %}
+                    
+                    <div class="flex items-center justify-between mt-4">
+                        <span class="text-base font-medium text-gray-900">${{ product.price }}</span>
+                        
+                        {% if product.stock > 0 %}
+                            <span class="text-xs text-gray-500">{{ product.stock }} en stock</span>
+                        {% endif %}
+                    </div>
+                    
+                    <a href="#"
+                       class="mt-4 w-full inline-flex justify-center items-center py-2 px-4 border border-black 
+                              {% if product.stock > 0 %}bg-black text-white hover:bg-gray-800{% else %}bg-white text-gray-400 border-gray-200 cursor-not-allowed{% endif %} 
+                              text-sm font-medium transition-colors duration-200">
+                        Voir détails
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-span-3 py-20 text-center">
+                <p class="text-gray-500">Aucun produit trouvé dans cette catégorie.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="mt-6">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</div>
+{% endblock %}
