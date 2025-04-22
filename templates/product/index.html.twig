@@ -7,7 +7,7 @@
     <h1 class="text-3xl font-light tracking-tight text-gray-900 mb-12 text-center">Nos Produits</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {% for product in products %}
+        {% for product in pagination %}
             <div class="group bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
                 <div class="relative">
                     <img 
@@ -50,6 +50,9 @@
                 <p class="text-gray-500">Produit pas disponible.</p>
             </div>
         {% endfor %}
+    </div>
+    <div class="mt-6">
+        {{ knp_pagination_render(pagination) }}
     </div>
 </div>
 {% endblock %}
