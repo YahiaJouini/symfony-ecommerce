@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,10 +17,34 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    public function findByCategoryQueryBuilder(int $categoryId)
+    public function findAllByCategory(?int $categoryId = null)
     {
-    return $this->createQueryBuilder('p')
-        ->where('p.category = :categoryId')
-        ->setParameter('categoryId', $categoryId);
+        if ($categoryId) {
+            return $this->findBy(['category' => $categoryId]);
+        }
+
+        return $this->findAll();
+    }
+
+    public function findProductById(int $id): ?Product
+    {
+        return $this->find($id);
+    }
+
+    public function searchProducts(string $searchTerm = '', ?int $categoryId = null): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        if ($searchTerm) {
+            $qb->andWhere('LOWER(p.name) LIKE LOWER(:searchTerm)')
+               ->setParameter('searchTerm', '%'.$searchTerm.'%');
+        }
+
+        if ($categoryId) {
+            $qb->andWhere('p.category = :categoryId')
+               ->setParameter('categoryId', $categoryId);
+        }
+
+        return $qb;
     }
 }

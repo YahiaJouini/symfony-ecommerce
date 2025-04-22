@@ -18,7 +18,12 @@ final class ProductController extends AbstractController
         PaginatorInterface $paginator,
         Request $request
     ): Response {
-        $query = $repository->createQueryBuilder('p')->getQuery();
+        $searchTerm = $request->query->get('search', '');
+        $categoryId = $request->query->get('category');
+        
+        $categoryId = $categoryId !== null ? (int)$categoryId : null;
+        
+        $query = $repository->searchProducts($searchTerm, $categoryId);
         
         $pagination = $paginator->paginate(
             $query,
@@ -28,6 +33,8 @@ final class ProductController extends AbstractController
         
         return $this->render('product/index.html.twig', [
             'pagination' => $pagination,
+            'searchTerm' => $searchTerm,
+            'categoryId' => $categoryId,
         ]);
     }
 
@@ -45,7 +52,8 @@ final class ProductController extends AbstractController
             throw $this->createNotFoundException('Catégorie non trouvée.');
         }
 
-        $queryBuilder = $productRepository->findByCategoryQueryBuilder($categoryId);
+        $searchTerm = $request->query->get('search', '');
+        $queryBuilder = $productRepository->searchProducts($searchTerm, $categoryId);
 
         $pagination = $paginator->paginate(
             $queryBuilder,
@@ -56,6 +64,8 @@ final class ProductController extends AbstractController
         return $this->render('product/category.html.twig', [
             'pagination' => $pagination,
             'category' => $category,
+            'searchTerm' => $searchTerm,
         ]);
     }
+
 }

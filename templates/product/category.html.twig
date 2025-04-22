@@ -13,6 +13,14 @@
         Découvrez tous les produits disponibles dans la catégorie <strong>{{ category.name }}</strong>.
     </p>
 
+      <form method="get" action="{{ path('app_product_by_category', { 'categoryId': category.id }) }}">
+        <div class="flex items-center mb-4">
+            <input type="text" name="search" value="{{ app.request.query.get('search') }}" placeholder="Search products..." class="border px-4 py-2 rounded-lg w-full" />
+            <button type="submit" class="ml-2 bg-black text-white px-4 py-2 rounded-lg">Search</button>
+        </div>
+     </form>
+
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for product in pagination %}
             <div class="group bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">

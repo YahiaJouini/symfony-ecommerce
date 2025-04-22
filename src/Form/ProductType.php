@@ -27,8 +27,7 @@ class ProductType extends AbstractType
             ->add('stock')
             ->add('image', UrlType::class, [
                 'label' => 'Product image',
-                'mapped' => false,
-                'required' => false,
+                'required' => true,
             ])
             ->add('showHome')
             ->add('category', EntityType::class, [
