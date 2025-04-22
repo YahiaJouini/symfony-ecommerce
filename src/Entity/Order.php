@@ -6,8 +6,6 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Product;
-
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -22,13 +20,16 @@ class Order
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\Column]
-    private ?float $total = null;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $orderDate = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $status = null;
 
     /**
-     * @var Collection<int, product>
+     * @var Collection<int, Product>
      */
-    #[ORM\ManyToMany(targetEntity: product::class, inversedBy: 'orders')]
+    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'orders')]
     private Collection $products;
 
     public function __construct()
@@ -49,31 +50,40 @@ class Order
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
         return $this;
     }
 
-    public function getTotal(): ?float
+    public function getOrderDate(): ?\DateTimeInterface
     {
-        return $this->total;
+        return $this->orderDate;
     }
 
-    public function setTotal(float $total): static
+    public function setOrderDate(\DateTimeInterface $orderDate): static
     {
-        $this->total = $total;
+        $this->orderDate = $orderDate;
+        return $this;
+    }
 
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
         return $this;
     }
 
     /**
-     * @return Collection<int, product>
+     * @return Collection<int, Product>
      */
     public function getProducts(): Collection
     {
         return $this->products;
     }
 
-    public function addProduct(product $product): static
+    public function addProduct(Product $product): static
     {
         if (!$this->products->contains($product)) {
             $this->products->add($product);
@@ -82,10 +92,9 @@ class Order
         return $this;
     }
 
-    public function removeProduct(product $product): static
+    public function removeProduct(Product $product): static
     {
         $this->products->removeElement($product);
-
         return $this;
     }
 }

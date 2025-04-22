@@ -47,4 +47,19 @@ class ProductRepository extends ServiceEntityRepository
 
         return $qb;
     }
+
+    public function isProductOrderedByUser($product, $user): bool
+    {
+        
+        $qb = $this->createQueryBuilder('p')
+            ->join('p.orders', 'o')
+            ->join('o.user', 'u')
+            ->where('p.id = :productId')
+            ->andWhere('u.id = :userId')
+            ->setParameter('productId', $product->getId())
+            ->setParameter('userId', $user->getId())
+            ->setMaxResults(1);
+        
+        return count($qb->getQuery()->getResult()) > 0;
+    }
 }

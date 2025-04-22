@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\OrderRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +36,33 @@ final class ProductController extends AbstractController
             'pagination' => $pagination,
             'searchTerm' => $searchTerm,
             'categoryId' => $categoryId,
+        ]);
+    }
+
+    #[Route('/product/{id}', name: 'app_product_show')]
+    public function show(
+        int $id,
+        ProductRepository $productRepository
+    ): Response {
+        $product = $productRepository->find($id);
+        
+        if (!$product) {
+            throw $this->createNotFoundException('Produit non trouvé.');
+        }
+        
+        $isOrdered = false;
+        if ($this->getUser()) {
+            foreach ($product->getOrders() as $order) {
+                if ($order->getUser() === $this->getUser()) {
+                    $isOrdered = true;
+                    break;
+                }
+            }
+        }
+        
+        return $this->render('product/show.html.twig', [
+            'product' => $product,
+            'isOrdered' => $isOrdered,
         ]);
     }
 
