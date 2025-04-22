@@ -8,39 +8,66 @@
                     </a>
                 </div>
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <a href="{{ path('app_home') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 
-                              {% if app.request.attributes.get('_route') == 'app_home' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
-                              text-sm font-medium">
-                        Acceuil
-                    </a>
-                    <a href="{{ path('app_product') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 
-                              {% if app.request.attributes.get('_route') == 'app_product' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
-                              text-sm font-medium">
-                        Produits
-                    </a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="#" 
+                           class="inline-flex items-center px-1 pt-1 border-b-2 
+                                  {% if app.request.attributes.get('_route') == 'admin_product_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  text-sm font-medium">
+                            Ajouter produit
+                        </a>
+                        <a href="#" 
+                           class="inline-flex items-center px-1 pt-1 border-b-2 
+                                  {% if app.request.attributes.get('_route') == 'admin_category_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  text-sm font-medium">
+                            Ajouter catégorie
+                        </a>
+                        <a href="#" 
+                           class="inline-flex items-center px-1 pt-1 border-b-2 
+                                  {% if app.request.attributes.get('_route') == 'admin_orders' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  text-sm font-medium">
+                            Voir commandes
+                        </a>
+                    {% else %}
+                        <a href="{{ path('app_home') }}" 
+                           class="inline-flex items-center px-1 pt-1 border-b-2 
+                                  {% if app.request.attributes.get('_route') == 'app_home' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  text-sm font-medium">
+                            Acceuil
+                        </a>
+                        <a href="{{ path('app_product') }}" 
+                           class="inline-flex items-center px-1 pt-1 border-b-2 
+                                  {% if app.request.attributes.get('_route') == 'app_product' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  text-sm font-medium">
+                            Produits
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
             <div class="flex items-center">
                 {% if app.user %}
-                    <div class="flex items-center sm:ml-8">
-                        <span class="text-sm text-gray-500 mr-2">{{ app.user.email }}</span>
-                        <a href="{{ path('app_logout') }}" 
-                           class="text-sm text-white bg-gray-800 py-2 px-4 rounded-md hover:bg-gray-700">
-                            Deconnexion
+                <div class="flex items-center sm:ml-8 space-x-4">
+                    {% if is_granted('ADMIN') %}
+                        <a href="{{ path('admin_dashboard') }}" 
+                        class="text-sm text-white bg-blue-600 py-2 px-4 rounded-md hover:bg-blue-500">
+                            Dashboard
                         </a>
-                    </div>
+                    {% endif %}
+                    <span class="text-sm text-gray-500">{{ app.user.email }}</span>
+                    <a href="{{ path('app_logout') }}" 
+                    class="text-sm text-white bg-gray-800 py-2 px-4 rounded-md hover:bg-gray-700">
+                        Deconnexion
+                    </a>
+                </div>
                 {% else %}
                     <div class="flex items-center sm:ml-6 space-x-2">
                         <a href="{{ path('app_login') }}" 
-                           class="text-sm text-gray-700 py-2 px-4 rounded-md">
-                            Connexion
+                               class="text-sm text-gray-700 py-2 px-4 rounded-md">
+                                Connexion
                         </a>
                         <a href="{{ path('app_register') }}" 
-                           class="text-sm text-white bg-gray-800 py-2 px-4 rounded-md hover:bg-gray-700">
-                            Inscription
+                               class="text-sm text-white bg-gray-800 py-2 px-4 rounded-md hover:bg-gray-700">
+                                Inscription
                         </a>
                     </div>
                 {% endif %}
