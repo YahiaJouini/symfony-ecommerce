@@ -14,6 +14,30 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_USER')]
 class OrderController extends AbstractController
 {
+    #[Route('/orders', name: 'app_user_orders')]
+    public function index(OrderRepository $orderRepository): Response
+    {
+        $user = $this->getUser();
+        $orders = $orderRepository->findBy(['user' => $user], ['orderDate' => 'DESC']);
+        
+        return $this->render('order/index.html.twig', [
+            'orders' => $orders,
+        ]);
+    }
+    
+    #[Route('/order/{id}', name: 'app_order_show')]
+    public function show(Order $order): Response
+    {
+        // Ensure users can only see their own orders
+        if ($order->getUser() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à voir cette commande.');
+        }
+        
+        return $this->render('order/show.html.twig', [
+            'order' => $order,
+        ]);
+    }
+
     #[Route('/order/add/{id}', name: 'app_order_add', methods: ['POST'])]
     public function add(
         int $id,

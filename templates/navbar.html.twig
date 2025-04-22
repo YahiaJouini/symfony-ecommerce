@@ -21,7 +21,7 @@
                                   text-sm font-medium">
                             Ajouter catégorie
                         </a>
-                        <a href="#" 
+                        <a href="{{ path('admin_orders') }}" 
                            class="inline-flex items-center px-1 pt-1 border-b-2 
                                   {% if app.request.attributes.get('_route') == 'admin_orders' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
                                   text-sm font-medium">
@@ -40,6 +40,14 @@
                                   text-sm font-medium">
                             Produits
                         </a>
+                        {% if app.user %}
+                        <a href="{{ path('app_user_orders') }}" 
+                           class="inline-flex items-center px-1 pt-1 border-b-2 
+                                  {% if app.request.attributes.get('_route') == 'app_user_orders' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  text-sm font-medium">
+                            Mes commandes
+                        </a>
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>
