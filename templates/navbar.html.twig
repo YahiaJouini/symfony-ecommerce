@@ -15,7 +15,7 @@
                                   text-sm font-medium">
                             Manager produit
                         </a>
-                        <a href="#" 
+                        <a href="{{ path('admin_category') }}"
                            class="inline-flex items-center px-1 pt-1 border-b-2 
                                   {% if app.request.attributes.get('_route') == 'admin_category_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
                                   text-sm font-medium">
