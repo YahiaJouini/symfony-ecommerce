@@ -2,13 +2,18 @@
 
 namespace App\Form;
 
-use App\Entity\Category;
-use App\Entity\Order;
 use App\Entity\Product;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProductType extends AbstractType
 {
@@ -19,18 +24,16 @@ class ProductType extends AbstractType
             ->add('description')
             ->add('price')
             ->add('stock')
-            ->add('image')
+            ->add('image', FileType::class, [
+                'label' => 'Product image',
+                'mapped' => false,
+                'required' => false,
+            ])
             ->add('showHome')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'id',
-            ])
-            ->add('orders', EntityType::class, [
-                'class' => Order::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
