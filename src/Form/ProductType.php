@@ -8,12 +8,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 
 class ProductType extends AbstractType
 {
@@ -24,7 +25,7 @@ class ProductType extends AbstractType
             ->add('description')
             ->add('price')
             ->add('stock')
-            ->add('image', FileType::class, [
+            ->add('image', UrlType::class, [
                 'label' => 'Product image',
                 'mapped' => false,
                 'required' => false,
