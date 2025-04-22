@@ -3,7 +3,7 @@
 {% block title %}Product Management{% endblock %}
 
 {% block body %}
-    <div class="container mx-auto px-4 pb-8 mt-28">
+   <div class="container mx-auto px-4 pb-8 mt-28">
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-2xl font-bold">Product Management</h1>
             <a href="{{ path('admin_product_new') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
@@ -34,7 +34,7 @@
                         <tr>
                             <td class="py-2 px-4 border-b">{{ product.id }}</td>
                             <td class="py-2 px-4 border-b">{{ product.name }}</td>
-                            <td class="py-2 px-4 border-b">{{ product.price|number_format(2, '.', ',') }} €</td>
+                            <td class="py-2 px-4 border-b">{{ product.price|format_currency('EUR') }}</td>
                             <td class="py-2 px-4 border-b">{{ product.stock }}</td>
                             <td class="py-2 px-4 border-b">
                                 {% if product.showHome %}

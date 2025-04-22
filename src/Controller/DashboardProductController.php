@@ -65,7 +65,7 @@ final class DashboardProductController extends AbstractController
             return $this->redirectToRoute('admin_product');
         }
 
-        return $this->render('dashboard_product/new.html.twig', [
+        return $this->render('dashboard/product/new.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
         ]);
@@ -74,7 +74,7 @@ final class DashboardProductController extends AbstractController
     #[Route('/{id}', name: 'admin_product_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
-        return $this->render('dashboard_product/show.html.twig', [
+        return $this->render('dashboard/product/show.html.twig', [
             'product' => $product,
         ]);
     }
@@ -120,7 +120,7 @@ final class DashboardProductController extends AbstractController
             return $this->redirectToRoute('admin_product');
         }
 
-        return $this->render('dashboard_product/edit.html.twig', [
+        return $this->render('dashboard/product/edit.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
         ]);
