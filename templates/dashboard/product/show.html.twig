@@ -5,13 +5,13 @@
 {% block body %}
     <div class="container mx-auto px-4 py-8 mt-20">
         <div class="flex justify-between items-center mb-8">
-            <h1 class="text-2xl font-bold">Product Details</h1>
+            <h1 class="text-2xl font-bold">Détails du produit</h1>
             <div>
                 <a href="{{ path('admin_product_edit', {'id': product.id}) }}" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2">
-                    Edit
+                    Modifier le produit
                 </a>
                 <a href="{{ path('admin_product') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
-                    Back to list
+                    Retour à la liste
                 </a>
             </div>
         </div>
@@ -23,7 +23,7 @@
                         <img src="{{product.image}}" alt="{{ product.name }}" class="w-full h-auto rounded">
                     {% else %}
                         <div class="bg-gray-200 h-64 flex items-center justify-center text-gray-500">
-                            No image
+                            Aucune image disponible
                         </div>
                     {% endif %}
                 </div>
@@ -33,7 +33,7 @@
                     
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div>
-                            <h3 class="font-medium text-gray-900">Price</h3>
+                            <h3 class="font-medium text-gray-900">Prix</h3>
                             <p>{{ product.price|format_currency('EUR') }}</p>
                         </div>
                         <div>
@@ -41,11 +41,13 @@
                             <p>{{ product.stock }}</p>
                         </div>
                         <div>
-                            <h3 class="font-medium text-gray-900">Show on Homepage</h3>
+                            <h3 class="font-medium text-gray-900">
+                                Voir sur la page d'accueil
+                            </h3>
                             <p>{{ product.showHome ? 'Yes' : 'No' }}</p>
                         </div>
                         <div>
-                            <h3 class="font-medium text-gray-900">Category</h3>
+                            <h3 class="font-medium text-gray-900">Categorie</h3>
                             <p>{{ product.category ? product.category.name : 'None' }}</p>
                         </div>
                     </div>

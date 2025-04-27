@@ -15,24 +15,36 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-
 class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('price')
-            ->add('stock')
+            ->add('name', TextType::class, [
+                'label' => 'Nom du produit',
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description du produit',
+            ])
+            ->add('price', MoneyType::class, [
+                'label' => 'Prix',
+                'currency' => false,
+            ])
+            ->add('stock', IntegerType::class, [
+                'label' => 'Stock disponible',
+            ])
             ->add('image', UrlType::class, [
-                'label' => 'Product image',
+                'label' => 'Image du produit',
                 'required' => true,
             ])
-            ->add('showHome')
+            ->add('showHome', CheckboxType::class, [
+                'label' => 'Afficher sur la page d’accueil',
+                'required' => false,
+            ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'id',
+                'label' => 'Catégorie',
             ]);
     }
 

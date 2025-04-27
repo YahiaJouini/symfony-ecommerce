@@ -10,48 +10,59 @@
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('admin_product') }}"
-                           class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'admin_product_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
-                                  text-sm font-medium">
+                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                                  {% if app.request.pathInfo starts with '/dashboard/product' %}
+                                      border-gray-400 text-gray-700
+                                  {% else %}
+                                      border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700
+                                  {% endif %}">
                             Manager produits
                         </a>
-
-                         <a href="#"
-                           class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'admin_product_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
-                                  text-sm font-medium">
-                            Details
-                        </a>
                         <a href="{{ path('admin_category') }}"
-                           class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'admin_category_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
-                                  text-sm font-medium">
+                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                                  {% if app.request.pathInfo starts with '/dashboard/category' %}
+                                      border-gray-400 text-gray-700
+                                  {% else %}
+                                      border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700
+                                  {% endif %}">
                             Manager catégories
                         </a>
                         <a href="{{ path('admin_orders') }}" 
-                           class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'admin_orders' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
-                                  text-sm font-medium">
+                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                                  {% if app.request.pathInfo starts with '/dashboard/orders' %}
+                                      border-gray-400 text-gray-700
+                                  {% else %}
+                                      border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700
+                                  {% endif %}">
                             Voir commandes
                         </a>
                     {% else %}
                         <a href="{{ path('app_home') }}" 
-                           class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'app_home' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
-                                  text-sm font-medium">
+                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                                  {% if app.request.attributes.get('_route') == 'app_home' %}
+                                      border-gray-400 text-gray-700
+                                  {% else %}
+                                      border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700
+                                  {% endif %}">
                             Acceuil
                         </a>
                         <a href="{{ path('app_product') }}" 
-                           class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'app_product' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
-                                  text-sm font-medium">
+                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                                  {% if app.request.attributes.get('_route') == 'app_product' %}
+                                      border-gray-400 text-gray-700
+                                  {% else %}
+                                      border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700
+                                  {% endif %}">
                             Produits
                         </a>
                         {% if app.user %}
                         <a href="{{ path('app_user_orders') }}" 
-                           class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'app_user_orders' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
-                                  text-sm font-medium">
+                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                                  {% if app.request.attributes.get('_route') == 'app_user_orders' %}
+                                      border-gray-400 text-gray-700
+                                  {% else %}
+                                      border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700
+                                  {% endif %}">
                             Mes commandes
                         </a>
                         {% endif %}

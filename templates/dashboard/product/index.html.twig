@@ -5,12 +5,14 @@
 {% block body %}
    <div class="container mx-auto px-4 pb-10 mt-28">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-            <h1 class="text-3xl font-bold text-gray-800">Product Management</h1>
+            <h1 class="text-3xl font-bold text-gray-800 capitalize">
+            gestion de produits
+            </h1>
             <a href="{{ path('admin_product_new') }}" class="bg-gray-800 text-white rounded-md border px-5 py-2.5 border-gray-800 hover:bg-gray-700 transition duration-200 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                Create New Product
+                Créer un produit
             </a>
         </div>
 
@@ -29,10 +31,15 @@
                     <thead>
                         <tr class="bg-gray-50">
                             <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">ID</th>
-                            <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Name</th>
-                            <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Price</th>
+                            <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Nom
+                            </th>
+                            <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                            Prix
+                            </th>
                             <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Stock</th>
-                            <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Show on Home</th>
+                            <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                            Voir sur l'accueil
+                            </th>
                             <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Actions</th>
                         </tr>
                     </thead>

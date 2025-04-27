@@ -43,7 +43,7 @@
 
     <section class="mb-24">
       <h2 class="text-2xl text-black text-center mb-10">Nos Produits Préférés</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for product in homeProducts %}
           <div class="bg-white border border-gray-400 rounded-sm overflow-hidden shadow-sm hover:shadow-md transition duration-300">
             <div class="relative h-72 overflow-hidden">
@@ -55,7 +55,7 @@
             <div class="p-6">
               <h3 class="text-lg font-medium text-gray-900 mb-2">{{ product.name }}</h3>
               {# <p class="text-sm text-gray-500 mb-4 line-clamp-2">{{ product.description }}</p> #}
-              <p class="text-base font-medium text-gray-900 mt-4">{{ product.price }} €</p>
+              <p class="text-base font-medium text-gray-900 mt-4  flex items-center">{{ product.price }} €</p>
             </div>
           </div>
         {% else %}

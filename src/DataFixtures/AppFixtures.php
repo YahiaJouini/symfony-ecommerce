@@ -43,17 +43,17 @@ class AppFixtures extends Fixture
             } else {
                 $product->setShowHome(false);
             }
-
-            $product->setName($faker->word())
-                    ->setDescription($faker->sentence(10))
+        
+            $product->setName(ucfirst($faker->words(3, true)))
+                    ->setDescription($faker->paragraph(3))
                     ->setPrice($faker->randomFloat(2, 5, 100))
                     ->setStock($faker->numberBetween(1, 100))
-                    ->setImage("https://picsum.photos/700/800")
+                    ->setImage("https://picsum.photos/700/800?random=" . random_int(1, 10000))
                     ->setCategory($faker->randomElement($categoryEntities));
-
+        
             $manager->persist($product);
         }
-
+        
         $manager->flush();
-    }
+    }        
 }

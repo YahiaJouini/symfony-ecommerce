@@ -16,8 +16,9 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Nom de la catégorie',
                 'constraints' => [
-                    new NotBlank(['message' => 'Category name is required']),
+                    new NotBlank(['message' => 'Le nom de la catégorie est obligatoire']),
                 ],
                 'attr' => [
                     'class' => 'mt-1 block w-full rounded-md border border-gray-400 px-3 py-2 text-gray-700 focus:border-gray-500',
@@ -27,14 +28,14 @@ class CategoryType extends AbstractType
                 ]
             ])
             ->add('image', TextType::class, [
-                'label' => 'Image URL',
+                'label' => 'URL de l\'image',
                 'constraints' => [
-                    new NotBlank(['message' => 'Image URL is required']),
-                    new Url(['message' => 'Please enter a valid URL']),
+                    new NotBlank(['message' => 'L\'URL de l\'image est obligatoire']),
+                    new Url(['message' => 'Veuillez entrer une URL valide']),
                 ],
                 'attr' => [
                     'class' => 'mt-1 block w-full rounded-md border border-gray-400 px-3 py-2 text-gray-700 focus:border-gray-500',
-                    'placeholder' => 'https://example.com/image.jpg'
+                    'placeholder' => 'https://exemple.com/image.jpg'
                 ],
                 'label_attr' => [
                     'class' => 'block text-sm font-medium text-gray-700 mb-1'
