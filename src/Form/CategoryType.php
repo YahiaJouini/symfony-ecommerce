@@ -20,7 +20,7 @@ class CategoryType extends AbstractType
                     new NotBlank(['message' => 'Category name is required']),
                 ],
                 'attr' => [
-                    'class' => 'mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:border-gray-500',
+                    'class' => 'mt-1 block w-full rounded-md border border-gray-400 px-3 py-2 text-gray-700 focus:border-gray-500',
                 ],
                 'label_attr' => [
                     'class' => 'block text-sm font-medium text-gray-700 mb-1'
@@ -33,7 +33,7 @@ class CategoryType extends AbstractType
                     new Url(['message' => 'Please enter a valid URL']),
                 ],
                 'attr' => [
-                    'class' => 'mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:border-gray-500',
+                    'class' => 'mt-1 block w-full rounded-md border border-gray-400 px-3 py-2 text-gray-700 focus:border-gray-500',
                     'placeholder' => 'https://example.com/image.jpg'
                 ],
                 'label_attr' => [

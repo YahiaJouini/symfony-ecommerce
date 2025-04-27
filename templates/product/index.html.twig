@@ -8,14 +8,14 @@
 
       <form method="get" action="{{ path('app_product') }}">
         <div class="flex items-center mb-4">
-             <input type="text" name="search" value="{{ app.request.query.get('search') }}" placeholder="Rechercher produits..." class="border px-4 py-2 rounded-lg w-full" />
+             <input type="text" name="search" value="{{ app.request.query.get('search') }}" placeholder="Rechercher produits..." class="border border-gray-400 px-4 py-2 rounded-lg w-full" />
             <button type="submit" class="ml-2 px-4 py-2 bg-gray-800 text-white rounded-md border border-gray-800 hover:bg-gray-700 transition duration-200">Rechercher</button>
         </div>
      </form>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for product in pagination %}
-            <div class="group bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
+            <div class="group bg-white border border-gray-400 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
                 <div class="relative">
                     <img 
                         src="{{ product.image }}" 
@@ -46,7 +46,7 @@
                     
                     <a href="{{ path('app_product_show', {'id': product.id}) }}" 
                        class="mt-4 w-full inline-flex justify-center items-center py-2 px-4 border border-black 
-                              {% if product.stock > 0 %}bg-black text-white hover:bg-gray-800{% else %}bg-white text-gray-400 border-gray-200 cursor-not-allowed{% endif %} 
+                              {% if product.stock > 0 %}bg-black text-white hover:bg-gray-800{% else %}bg-white text-gray-400 border-gray-300 cursor-not-allowed{% endif %} 
                               text-sm font-medium transition-colors duration-200">
                         Voir details
                     </a>

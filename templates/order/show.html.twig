@@ -4,7 +4,7 @@
 {% block title %}Détails de la Commande #{{ order.id }}{% endblock %}
 
 {% block body %}
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mt-16">
+    <div class="max-w-7xl shadow-md border border-gray-400 mt-28     mx-auto px-4 sm:px-6 lg:px-8 py-10 mt-16">
         <div class="mb-6 flex justify-between items-center">
             <h1 class="text-2xl font-semibold text-gray-900">Commande #{{ order.id }}</h1>
             <a href="{{ path('app_user_orders') }}" class="text-indigo-600 hover:text-indigo-900">Retour à mes commandes</a>
@@ -20,7 +20,7 @@
             <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Informations de la commande</h3>
             </div>
-            <div class="border-t border-gray-200">
+            <div class="border-t border-gray-300">
                 <dl>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">Date de commande</dt>
@@ -50,8 +50,8 @@
             <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Produits commandés</h3>
             </div>
-            <div class="border-t border-gray-200">
-                <ul class="divide-y divide-gray-200">
+            <div class="border-t border-gray-300">
+                <ul class="divide-y divide-gray-300">
                     {% for product in order.products %}
                         <li class="px-4 py-4 sm:px-6">
                             <div class="flex items-center justify-between">

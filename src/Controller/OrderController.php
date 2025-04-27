@@ -28,7 +28,6 @@ class OrderController extends AbstractController
     #[Route('/order/{id}', name: 'app_order_show')]
     public function show(Order $order): Response
     {
-        // Ensure users can only see their own orders
         if ($order->getUser() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à voir cette commande.');
         }

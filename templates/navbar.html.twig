@@ -11,39 +11,46 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('admin_product') }}"
                            class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'admin_product_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  {% if app.request.attributes.get('_route') == 'admin_product_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
                                   text-sm font-medium">
-                            Manager produit
+                            Manager produits
+                        </a>
+
+                         <a href="#"
+                           class="inline-flex items-center px-1 pt-1 border-b-2 
+                                  {% if app.request.attributes.get('_route') == 'admin_product_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
+                                  text-sm font-medium">
+                            Details
                         </a>
                         <a href="{{ path('admin_category') }}"
                            class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'admin_category_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  {% if app.request.attributes.get('_route') == 'admin_category_add' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
                                   text-sm font-medium">
-                            Ajouter catégorie
+                            Manager catégories
                         </a>
                         <a href="{{ path('admin_orders') }}" 
                            class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'admin_orders' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  {% if app.request.attributes.get('_route') == 'admin_orders' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
                                   text-sm font-medium">
                             Voir commandes
                         </a>
                     {% else %}
                         <a href="{{ path('app_home') }}" 
                            class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'app_home' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  {% if app.request.attributes.get('_route') == 'app_home' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
                                   text-sm font-medium">
                             Acceuil
                         </a>
                         <a href="{{ path('app_product') }}" 
                            class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'app_product' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  {% if app.request.attributes.get('_route') == 'app_product' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
                                   text-sm font-medium">
                             Produits
                         </a>
                         {% if app.user %}
                         <a href="{{ path('app_user_orders') }}" 
                            class="inline-flex items-center px-1 pt-1 border-b-2 
-                                  {% if app.request.attributes.get('_route') == 'app_user_orders' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700{% endif %} 
+                                  {% if app.request.attributes.get('_route') == 'app_user_orders' %}border-gray-500 text-gray-900{% else %}border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700{% endif %} 
                                   text-sm font-medium">
                             Mes commandes
                         </a>
@@ -60,6 +67,7 @@
                         class="text-sm text-white bg-blue-600 py-2 px-4 rounded-md hover:bg-blue-500">
                             Dashboard
                         </a>
+                        
                     {% endif %}
                     <span class="text-sm text-gray-500">{{ app.user.email }}</span>
                     <a href="{{ path('app_logout') }}" 
