@@ -103,10 +103,18 @@
                             <form action="{{ path('app_order_add', {'id': product.id}) }}" method="post">
                                 <div class="mb-4">
                                     <label for="quantity" class="block text-sm font-medium text-gray-700">Quantité</label>
-                                    <div class="mt-1 flex rounded-md shadow-sm">
-                                        <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}" 
-                                               class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    </div>
+                                   <div class="mt-1">
+                                    <input
+                                        type="number"
+                                        name="quantity"
+                                        id="quantity"
+                                        value="1"
+                                        min="1"
+                                        max="{{ product.stock }}"
+                                        class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-150 ease-in-out"
+                                    />
+                                </div>
+
                                     <p class="mt-1 text-sm text-gray-500">{{ product.stock }} disponible(s)</p>
                                 </div>
                                 
