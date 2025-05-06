@@ -27,14 +27,14 @@ class Order
     private ?string $status = null;
 
     /**
-     * @var Collection<int, Product>
+     * @var Collection<int, OrderItem>
      */
-    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'orders')]
-    private Collection $products;
+    #[ORM\OneToMany(mappedBy: 'orderRef', targetEntity: OrderItem::class, orphanRemoval: true, cascade: ['persist'])]
+    private Collection $orderItems;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->orderItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,25 +76,66 @@ class Order
     }
 
     /**
-     * @return Collection<int, Product>
+     * @return Collection<int, OrderItem>
      */
-    public function getProducts(): Collection
+    public function getOrderItems(): Collection
     {
-        return $this->products;
+        return $this->orderItems;
     }
 
-    public function addProduct(Product $product): static
+    public function addOrderItem(OrderItem $orderItem): static
     {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems->add($orderItem);
+            $orderItem->setOrderRef($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Product $product): static
+    public function removeOrderItem(OrderItem $orderItem): static
     {
-        $this->products->removeElement($product);
+        if ($this->orderItems->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getOrderRef() === $this) {
+                $orderItem->setOrderRef(null);
+            }
+        }
+
         return $this;
+    }
+    
+    /**
+     * Get all products in this order
+     * 
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        $products = new ArrayCollection();
+        foreach ($this->orderItems as $orderItem) {
+            $products->add($orderItem->getProduct());
+        }
+        return $products;
+    }
+
+    public function containsProduct(Product $product): bool
+    {
+        foreach ($this->orderItems as $orderItem) {
+            if ($orderItem->getProduct() === $product) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public function getOrderItemForProduct(Product $product): ?OrderItem
+    {
+        foreach ($this->orderItems as $orderItem) {
+            if ($orderItem->getProduct() === $product) {
+                return $orderItem;
+            }
+        }
+        return null;
     }
 }

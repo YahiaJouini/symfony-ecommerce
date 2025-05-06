@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Order;
+use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,25 +18,43 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
-    public function findOrdersByUser($user)
+    /**
+     * Find pending order by user and product
+     */
+    public function findPendingByUserAndProduct(User $user, Product $product): ?Order
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.user = :user')
-            ->setParameter('user', $user)
-            ->orderBy('o.orderDate', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findByUserAndProduct($user, $product)
-    {
-        return $this->createQueryBuilder('o')
-            ->innerJoin('o.products', 'p')
+            ->join('o.orderItems', 'oi')
             ->where('o.user = :user')
-            ->andWhere('p.id = :productId')
+            ->andWhere('oi.product = :product')
+            ->andWhere('o.status = :status')
             ->setParameter('user', $user)
-            ->setParameter('productId', $product->getId())
+            ->setParameter('product', $product)
+            ->setParameter('status', 'pending')
             ->getQuery()
             ->getOneOrNullResult();
+    }
+    
+    /**
+     * Find or create pending order for user
+     */
+    public function findOrCreatePendingOrder(User $user): Order
+    {
+        $pendingOrder = $this->createQueryBuilder('o')
+            ->where('o.user = :user')
+            ->andWhere('o.status = :status')
+            ->setParameter('user', $user)
+            ->setParameter('status', 'pending')
+            ->getQuery()
+            ->getOneOrNullResult();
+            
+        if (!$pendingOrder) {
+            $pendingOrder = new Order();
+            $pendingOrder->setUser($user);
+            $pendingOrder->setOrderDate(new \DateTime());
+            $pendingOrder->setStatus('pending');
+        }
+        
+        return $pendingOrder;
     }
 }

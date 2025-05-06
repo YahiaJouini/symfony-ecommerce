@@ -34,19 +34,18 @@ class Product
     #[ORM\Column(type: 'boolean')]
     private bool $showHome;    
 
-    
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
     private ?Category $category = null;
 
     /**
-     * @var Collection<int, Order>
+     * @var Collection<int, OrderItem>
      */
-    #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'products')]
-    private Collection $orders;
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderItem::class)]
+    private Collection $orderItems;
 
     public function __construct()
     {
-        $this->orders = new ArrayCollection();
+        $this->orderItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,29 +135,45 @@ class Product
     }
 
     /**
+     * @return Collection<int, OrderItem>
+     */
+    public function getOrderItems(): Collection
+    {
+        return $this->orderItems;
+    }
+
+    public function addOrderItem(OrderItem $orderItem): static
+    {
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems->add($orderItem);
+            $orderItem->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderItem(OrderItem $orderItem): static
+    {
+        if ($this->orderItems->removeElement($orderItem)) {
+            if ($orderItem->getProduct() === $this) {
+                $orderItem->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+    
+    /**
+     * Get all orders containing this product
+     * 
      * @return Collection<int, Order>
      */
     public function getOrders(): Collection
     {
-        return $this->orders;
-    }
-
-    public function addOrder(Order $order): static
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders->add($order);
-            $order->addProduct($this);
+        $orders = new ArrayCollection();
+        foreach ($this->orderItems as $orderItem) {
+            $orders->add($orderItem->getOrderRef());
         }
-
-        return $this;
-    }
-
-    public function removeOrder(Order $order): static
-    {
-        if ($this->orders->removeElement($order)) {
-            $order->removeProduct($this);
-        }
-
-        return $this;
+        return $orders;
     }
 }

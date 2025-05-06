@@ -47,7 +47,7 @@ class AppFixtures extends Fixture
             $product->setName(ucfirst($faker->words(3, true)))
                     ->setDescription($faker->paragraph(3))
                     ->setPrice($faker->randomFloat(2, 5, 100))
-                    ->setStock($faker->numberBetween(1, 100))
+                    ->setStock($faker->numberBetween(10, 100))
                     ->setImage("https://picsum.photos/700/800?random=" . random_int(1, 10000))
                     ->setCategory($faker->randomElement($categoryEntities));
         

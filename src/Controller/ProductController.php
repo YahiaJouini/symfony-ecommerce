@@ -42,7 +42,8 @@ final class ProductController extends AbstractController
     #[Route('/product/{id}', name: 'app_product_show')]
     public function show(
         int $id,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        OrderRepository $orderRepository
     ): Response {
         $product = $productRepository->find($id);
         
@@ -51,10 +52,16 @@ final class ProductController extends AbstractController
         }
         
         $isOrdered = false;
-        if ($this->getUser()) {
-            foreach ($product->getOrders() as $order) {
-                if ($order->getUser() === $this->getUser()) {
+        $orderItem = null;
+        $currentUser = $this->getUser();
+        
+        if ($currentUser) {
+            $userOrders = $orderRepository->findBy(['user' => $currentUser]);
+            
+            foreach ($userOrders as $order) {
+                if ($order->containsProduct($product)) {
                     $isOrdered = true;
+                    $orderItem = $order->getOrderItemForProduct($product);
                     break;
                 }
             }
@@ -63,6 +70,7 @@ final class ProductController extends AbstractController
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'isOrdered' => $isOrdered,
+            'orderItem' => $orderItem,
         ]);
     }
 
@@ -95,5 +103,4 @@ final class ProductController extends AbstractController
             'searchTerm' => $searchTerm,
         ]);
     }
-
 }
