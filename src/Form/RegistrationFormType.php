@@ -12,31 +12,43 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [
-                'label' => 'Adresse e-mail',
-            ])
-            ->add('plainPassword', PasswordType::class, [
-                'label' => 'Mot de passe',
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez entrer un mot de passe',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
-                        'max' => 4096,
-                    ]),
-                ],
-            ])
-        ;
+        ->add('firstname', TextType::class, [
+            'label' => 'Prénom',
+            'constraints' => [
+                new NotBlank(['message' => 'Veuillez entrer votre prénom']),
+            ],
+        ])
+        ->add('lastname', TextType::class, [
+            'label' => 'Nom',
+            'constraints' => [
+                new NotBlank(['message' => 'Veuillez entrer votre nom']),
+            ],
+        ])
+        ->add('email', EmailType::class, [
+            'label' => 'Adresse e-mail',
+        ])
+        ->add('plainPassword', PasswordType::class, [
+            'label' => 'Mot de passe',
+            'mapped' => false,
+            'attr' => ['autocomplete' => 'new-password'],
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Veuillez entrer un mot de passe',
+                ]),
+                new Length([
+                    'min' => 6,
+                    'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
+                    'max' => 4096,
+                ]),
+            ],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
