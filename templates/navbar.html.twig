@@ -7,7 +7,7 @@
                         Boutique Artisanale
                     </a>
                 </div>
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-7">
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('admin_product') }}"
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
@@ -45,6 +45,17 @@
                                       border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700
                                   {% endif %}">
                             Acceuil
+                        </a>
+
+                         <a href="{{ path('app_about') }}" 
+                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                                  {% if app.request.attributes.get('_route') == 'app_about' %}
+                                      border-gray-400 text-gray-700
+                                  {% else %}
+                                      border-transparent text-gray-500 hover:border-gray-400 hover:text-gray-700
+                                  {% endif %}">
+                            
+                            À Propos
                         </a>
                         <a href="{{ path('app_product') }}" 
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium

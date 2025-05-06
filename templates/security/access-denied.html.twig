@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès refusé{% endblock %}
+
+{% block body %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg text-center">
+        <div class="text-red-500 text-6xl mb-6">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h1 class="text-4xl font-semibold text-gray-900 mb-4">Accès refusé</h1>
+        <p class="text-lg text-gray-600 mb-6">
+            Vous n'avez pas l'autorisation d'accéder à cette page. Veuillez contacter votre administrateur si vous pensez qu'il s'agit d'une erreur.
+        </p>
+        <a href="{{ path('app_home') }}" class="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Retour à la page d'accueil
+        </a>
+    </div>
+</div>
+{% endblock %}
