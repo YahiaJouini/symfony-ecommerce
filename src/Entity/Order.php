@@ -138,4 +138,14 @@ class Order
         }
         return null;
     }
+
+    public function getTotalQuantity(): int
+    {
+        $total = 0;
+        foreach ($this->orderItems as $orderItem) {
+            $total += $orderItem->getQuantity();
+        }
+        return $total;
+    }
+
 }
