@@ -61,7 +61,7 @@
             </div>
             <div class="border-t border-gray-300 p-4">
                 <form action="{{ path('admin_order_update_status', {'id': order.id}) }}" method="post" class="flex space-x-4">
-                    <select name="status" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <select name="status" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border-2">
                         <option value="pending" {% if order.status == 'pending' %}selected{% endif %}>En attente</option>
                         <option value="processing" {% if order.status == 'processing' %}selected{% endif %}>En traitement</option>
                         <option value="shipped" {% if order.status == 'shipped' %}selected{% endif %}>Expédié</option>

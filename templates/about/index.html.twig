@@ -1,23 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Category{% endblock %}
+{% block title %}À propos de nous{% endblock %}
 
 {% block body %}
-<div class="min-h-screen flex items-center justify-center">
-<div class="mx-auto max-w-5xl px-4 py-12 bg-white rounded-lg shadow-lg mt-28">
-    <section class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">À propos de nous</h1>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-            Bienvenue sur notre boutique en ligne d'artisanat. Nous vendons des produits artisanaux uniques, fabriqués avec soin pour enrichir votre quotidien.
-        </p>
+<div class="min-h-screen flex items-center justify-center mt-20">
+  <div class="mx-auto  max-w-5xl px-8 py-16 bg-white rounded-lg shadow-xl border border-slate-300 my-16">
+    <div class="w-32 h-1 bg-black mx-auto mb-4"></div>
+    
+    <section class="text-center mb-16">
+      <h1 class="text-5xl font-bold text-gray-900 mb-6">À propos de nous</h1>
+      <div class="w-24 h-px bg-gray-400 mx-auto mb-8"></div>
+      <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+        Bienvenue sur notre boutique en ligne d'artisanat. Nous vendons des produits artisanaux uniques, 
+        fabriqués avec soin pour enrichir votre quotidien.
+      </p>
     </section>
 
-    <section class="mb-16 text-center">
-        <h2 class="text-3xl font-semibold text-gray-900 mb-4">Notre mission</h2>
-        <p class="text-lg text-gray-700 leading-relaxed">
-            Nous croyons en l'authenticité et la qualité. Chaque produit que nous vendons est soigneusement sélectionné et fabriqué par des artisans passionnés. Notre mission est de vous offrir des accessoires, des objets déco et du textile qui ajoutent une touche unique à votre vie.
+    <div class="flex flex-col md:flex-row items-center gap-16 mb-16">
+      <div class="w-full md:w-1/2">
+        <div class="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
+          <div class="text-6xl text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w-full md:w-1/2">
+        <h2 class="text-3xl font-semibold text-gray-900 mb-6">Notre mission</h2>
+        <div class="w-16 h-px bg-gray-400 mb-6"></div>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Nous croyons en l'authenticité et la qualité. Chaque produit que nous vendons est 
+          soigneusement sélectionné et fabriqué par des artisans passionnés.
         </p>
-    </section>
-</div>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          Notre mission est de vous offrir des accessoires, des objets déco et du textile qui 
+          ajoutent une touche unique à votre vie quotidienne.
+        </p>
+      </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+      <div class="p-6 border border-gray-200 rounded-lg text-center">
+        <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-medium text-gray-900 mb-2">Qualité</h3>
+        <p class="text-gray-600">Des produits soigneusement sélectionnés pour leur excellence.</p>
+      </div>
+      
+      <div class="p-6 border border-gray-200 rounded-lg text-center">
+        <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017a2 2 0 01-1.789-1.106l-3.5-7A2 2 0 017.247 10H12" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v7" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-medium text-gray-900 mb-2">Artisanat</h3>
+        <p class="text-gray-600">Créés par des artisans passionnés et talentueux.</p>
+      </div>
+      
+      <div class="p-6 border border-gray-200 rounded-lg text-center">
+        <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-medium text-gray-900 mb-2">Authenticité</h3>
+        <p class="text-gray-600">Des pièces uniques qui racontent une histoire.</p>
+      </div>
+    </div>
+    
+    <div class="w-32 h-1 bg-black mx-auto"></div>
+  </div>
 </div>
 {% endblock %}
