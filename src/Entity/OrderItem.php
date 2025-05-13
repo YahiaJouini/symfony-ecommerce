@@ -24,6 +24,9 @@ class OrderItem
     #[ORM\Column]
     private ?int $quantity = null;
 
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    private ?float $price = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -65,8 +68,20 @@ class OrderItem
         return $this;
     }
 
-    public function getOrderItems(): Collection
+    public function getPrice(): ?float
     {
-        return $this->orderItems;
+        return $this->price;
+    }
+
+    public function setPrice(float $price): static
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getTotal(): float
+    {
+        return $this->price * $this->quantity;
     }
 }

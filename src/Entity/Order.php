@@ -26,6 +26,12 @@ class Order
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    private ?float $total = 0;
+
     /**
      * @var Collection<int, OrderItem>
      */
@@ -35,6 +41,7 @@ class Order
     public function __construct()
     {
         $this->orderItems = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -72,6 +79,28 @@ class Order
     public function setStatus(string $status): static
     {
         $this->status = $status;
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    public function getTotal(): ?float
+    {
+        return $this->total;
+    }
+
+    public function setTotal(float $total): static
+    {
+        $this->total = $total;
         return $this;
     }
 

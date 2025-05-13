@@ -82,59 +82,19 @@
             </div>
 
             <div class="mt-8 space-y-4">
-                {% if is_granted('ROLE_USER') %}
-                    {% if product.stock > 0 %}
-                        {% if isOrdered and orderItem %}
-                            <div class="mb-4 p-4 bg-blue-50 border border-blue-100 rounded-md">
-                                <div class="flex items-center justify-between">
-                                    <div class="text-blue-800">
-                                        <p class="font-medium">Déjà dans votre panier</p>
-                                        <p class="text-sm">Quantité actuelle: {{ orderItem.quantity }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                               <form action="{{ path('app_order_remove_item', {'orderItemId': orderItem.id}) }}" method="post">
-                                    <button type="submit" class="w-full mb-2 bg-red-500 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-red-700">
-                                        Retirer du panier
-                                    </button>
-                                </form>
-                            </div>
-                        {% else %}
-                            <form action="{{ path('app_order_add', {'id': product.id}) }}" method="post">
-                                <div class="mb-4">
-                                    <label for="quantity" class="block text-sm font-medium text-gray-700">Quantité</label>
-                                   <div class="mt-1">
-                                    <input
-                                        type="number"
-                                        name="quantity"
-                                        id="quantity"
-                                        value="1"
-                                        min="1"
-                                        max="{{ product.stock }}"
-                                        class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-150 ease-in-out"
-                                    />
-                                </div>
-
-                                    <p class="mt-1 text-sm text-gray-500">{{ product.stock }} disponible(s)</p>
-                                </div>
-                                
-                                <button type="submit" class="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-                                    </svg>
-                                    Ajouter au panier
-                                </button>
-                            </form>
-                        {% endif %}
-                    {% else %}
-                        <button disabled class="w-full bg-gray-300 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-gray-500 cursor-not-allowed">
-                            Hors stock
+                {% if product.stock > 0 %}
+                    <form action="{{ path('cart_add', {'id': product.id}) }}" method="get" class="space-y-4">
+                        <button type="submit" class="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                            </svg>
+                            Ajouter au panier
                         </button>
-                    {% endif %}
+                    </form>
                 {% else %}
-                    <a href="{{ path('app_login') }}" class="w-full bg-gray-100 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                        Connectez-vous pour commander
-                    </a>
+                    <button disabled class="w-full bg-gray-300 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-gray-500 cursor-not-allowed">
+                        Hors stock
+                    </button>
                 {% endif %}
                 
                 <a href="{{ path('app_product') }}" class="w-full bg-white border border-gray-400 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
