@@ -20,25 +20,41 @@ security:
             login_path: app_login
             check_path: app_login
             enable_csrf: true
+            default_target_path: app_home
          logout:
             path: app_logout
-            # where to redirect after logout
-            # target: app_any_route
+            target: app_home
 
-         # activate different ways to authenticate
-         # https://symfony.com/doc/current/security.html#the-firewall
-
-         # https://symfony.com/doc/current/security/impersonating_user.html
-         # switch_user: true
+         remember_me:
+            secret: '%kernel.secret%'
+            lifetime: 604800 # 1 week
+            path: /
 
    # Easy way to control access for large sections of your site
    # Note: Only the *first* access control that matches will be used
    access_control:
-      - { path: ^/profile, roles: IS_AUTHENTICATED_FULLY }
-
+      # admin
       - { path: ^/dashboard, roles: ROLE_ADMIN }
+      - { path: ^/admin, roles: ROLE_ADMIN }
+      
+      # user
+      - { path: ^/profile, roles: ROLE_USER }
+      - { path: ^/cart/validate, roles: ROLE_USER }
+      - { path: ^/orders, roles: ROLE_USER }
+      
+      # public (all users)
+      - { path: ^/login, roles: PUBLIC_ACCESS }
+      - { path: ^/register, roles: PUBLIC_ACCESS }
+      - { path: ^/about, roles: PUBLIC_ACCESS }
+      - { path: ^/products, roles: PUBLIC_ACCESS }
+      - { path: ^/cart$, roles: PUBLIC_ACCESS }
+      - { path: ^/cart/add, roles: PUBLIC_ACCESS }
+      - { path: ^/cart/remove, roles: PUBLIC_ACCESS }
+      - { path: ^/cart/decrease, roles: PUBLIC_ACCESS }
+      - { path: ^/$, roles: PUBLIC_ACCESS }
 
-      - { path: ^/delete, roles: ROLE_ADMIN }
+   role_hierarchy:
+      ROLE_ADMIN: ROLE_USER
 
    access_denied_url: /access-denied
 

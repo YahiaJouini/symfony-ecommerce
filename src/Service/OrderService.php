@@ -52,7 +52,6 @@ class OrderService
             
             $total += $product->getPrice() * $quantity;
             
-            // Update product stock
             $product->setStock($product->getStock() - $quantity);
             
             $this->entityManager->persist($orderItem);
@@ -63,7 +62,6 @@ class OrderService
         $this->entityManager->persist($order);
         $this->entityManager->flush();
         
-        // Clear the cart after order creation
         $this->cartService->clearCart();
         
         return $order;
